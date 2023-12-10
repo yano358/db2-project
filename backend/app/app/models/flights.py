@@ -11,6 +11,7 @@ class FlightsCreate(BaseModel):
     departure_time: str
     arrival_time: str
 
+
 class FlightsUpdate(BaseModel):
     pass
 

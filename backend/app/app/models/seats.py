@@ -10,6 +10,7 @@ class SeatsCreate(BaseModel):
     taken_status: bool
     class_type: str
 
+
 class SeatsUpdate(BaseModel):
     pass
 

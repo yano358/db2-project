@@ -7,13 +7,12 @@ from sqlmodel import Field, Column, ForeignKey
 
 
 class ClientsCreate(BaseModel):
-    first_name: str
-    last_name: str
-    country: str
-    city: str
-    address: str
-    postal_code: str
-    
+      first_name: str
+      last_name: str
+      country: str
+      city: str
+      address: str
+      postal_code: str
 
 class ClientsUpdate(BaseModel):
     pass
