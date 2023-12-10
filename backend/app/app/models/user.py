@@ -25,7 +25,7 @@ class User(BaseDBModel, table=True):
     email: str = Field(sa_column=Column(String, unique=True))
     hashed_password: str = Field(sa_column=Column(String))
     is_superuser: bool = Field(default=False)
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: Optional[int] = Field(default=None, primary_key=True , nullable=False)
     created_date: datetime = Field(
         sa_column=Column(DateTime(timezone=True)), default_factory=datetime.utcnow
     )
