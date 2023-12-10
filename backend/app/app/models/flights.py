@@ -7,7 +7,10 @@ from sqlmodel import Field, ForeignKey,Column
 
  
 class FlightsCreate(BaseModel):
-    pass    
+    price: float
+    departure_time: str
+    arrival_time: str
+
 
 class FlightsUpdate(BaseModel):
     pass
