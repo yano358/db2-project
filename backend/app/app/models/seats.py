@@ -7,7 +7,8 @@ from sqlmodel import Field, ForeignKey,Column
 
 
 class SeatsCreate(BaseModel):
-    pass
+    taken_status: bool
+    class_type: str
 
 class SeatsUpdate(BaseModel):
     pass

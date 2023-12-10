@@ -6,7 +6,8 @@ from pydantic import BaseModel
 from sqlmodel import Field
 
 class PlanesCreate(BaseModel):
-    pass
+    model: str
+    airline: str
 
 class PlanesUpdate(BaseModel):
     pass
