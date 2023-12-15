@@ -30,3 +30,5 @@ class Clients(BaseDBModel, table=True):
     city: Optional[str] = Field(default=None)
     address: Optional[str] = Field(default=None) #street+house/flat number
     postal_code: Optional[str] = Field(default=None)
+
+
