@@ -7,7 +7,8 @@ from sqlmodel import Field
 
 
 class LuggageCreate(BaseModel):
-    pass
+    luggage_type: str
+
 
 class LuggageUpdate(BaseModel):
     pass

@@ -7,7 +7,15 @@ from sqlmodel import Field, Column, ForeignKey
 
 
 class ClientsCreate(BaseModel):
-    pass
+
+    first_name: str
+    last_name: str
+    country: str
+    city: str
+    address: str
+    postal_code: str
+    
+
 
 class ClientsUpdate(BaseModel):
     pass
@@ -23,4 +31,11 @@ class Clients(BaseDBModel, table=True):
     country: Optional[str] = Field(default=None)
     city: Optional[str] = Field(default=None)
     address: Optional[str] = Field(default=None) #street+house/flat number
+<<<<<<< HEAD
     postal_code: Optional[str] = Field(default=None)
+=======
+    postal_code: Optional[str] = Field(default=None)
+
+
+
+>>>>>>> 904f5eeea2da9ebd72b9123a6265036c514d607d
