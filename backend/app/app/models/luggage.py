@@ -9,6 +9,7 @@ from sqlmodel import Field
 class LuggageCreate(BaseModel):
     luggage_type: str
 
+
 class LuggageUpdate(BaseModel):
     pass
 
