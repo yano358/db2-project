@@ -31,11 +31,5 @@ class Clients(BaseDBModel, table=True):
     country: Optional[str] = Field(default=None)
     city: Optional[str] = Field(default=None)
     address: Optional[str] = Field(default=None) #street+house/flat number
-<<<<<<< HEAD
-    postal_code: Optional[str] = Field(default=None)
-=======
     postal_code: Optional[str] = Field(default=None)
 
-
-
->>>>>>> 904f5eeea2da9ebd72b9123a6265036c514d607d
