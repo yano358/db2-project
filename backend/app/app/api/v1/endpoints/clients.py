@@ -11,7 +11,7 @@ router = APIRouter()
 
 @router.post("/{user_id}/", response_model=Clients)
 async def create_client(
-    #user_id: int,
+    user_id: int,
     clients_in: ClientsCreate,
     session: Session = Depends(get_session),
 ) -> Clients:

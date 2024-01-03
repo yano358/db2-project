@@ -14,7 +14,9 @@ const Login = () => {
     if (error) {
       setAuthError(true);
     }
-    window.location.href = "/todos/2137";
+
+    // TODO: redirect to home page
+    //window.location.href = "/";
   };
 
   return (
