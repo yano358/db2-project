@@ -22,4 +22,12 @@ async def delete_seat(
     session: Session = Depends(get_session),
 ) -> None:
     crud_seats.remove(session, id=seat_id)
-    return None
+
+@router.get("/{seat_id}/" , response_model=Seats)
+async def get_seat(
+    seat_id: int,
+    session: Session = Depends(get_session),
+) -> Seats:
+    seat = crud_seats.get(session,id=seat_id)
+    return seat
+
