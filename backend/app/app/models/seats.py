@@ -7,6 +7,7 @@ from sqlmodel import Field, ForeignKey,Column
 
 
 class SeatsCreate(BaseModel):
+    plane_id: int
     taken_status: bool
     class_type: str
 

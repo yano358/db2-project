@@ -1,6 +1,12 @@
 import { emptySlitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getAllFlightsApiV1FlightsGet: build.query<
+      GetAllFlightsApiV1FlightsGetApiResponse,
+      GetAllFlightsApiV1FlightsGetApiArg
+    >({
+      query: () => ({ url: `/api/v1/flights` }),
+    }),
     createFlightApiV1FlightsPost: build.mutation<
       CreateFlightApiV1FlightsPostApiResponse,
       CreateFlightApiV1FlightsPostApiArg
@@ -24,6 +30,9 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
+export type GetAllFlightsApiV1FlightsGetApiResponse =
+  /** status 200 Successful Response */ Flights[];
+export type GetAllFlightsApiV1FlightsGetApiArg = void;
 export type CreateFlightApiV1FlightsPostApiResponse =
   /** status 200 Successful Response */ Flights;
 export type CreateFlightApiV1FlightsPostApiArg = {
@@ -52,11 +61,16 @@ export type HttpValidationError = {
   detail?: ValidationError[];
 };
 export type FlightsCreate = {
+  plane_id: number;
+  start_airport_id: number;
+  destination_airport_id: number;
   price: number;
   departure_time: string;
   arrival_time: string;
 };
 export const {
+  useGetAllFlightsApiV1FlightsGetQuery,
+  useLazyGetAllFlightsApiV1FlightsGetQuery,
   useCreateFlightApiV1FlightsPostMutation,
   useDeleteFlightApiV1FlightsFlightIdDeleteMutation,
 } = injectedRtkApi;

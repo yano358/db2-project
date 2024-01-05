@@ -7,6 +7,12 @@ from app.core.db import get_session
 
 router = APIRouter()
 
+@router.get("", response_model=list[User])
+async def read_users(
+    db_session: Session = Depends(get_session),
+) -> list[User]:
+    users = crud_user.get_all(db=db_session)
+    return users
 
 @router.post("", response_model=User)
 async def create_user(

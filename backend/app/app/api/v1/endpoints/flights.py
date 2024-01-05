@@ -23,3 +23,10 @@ async def delete_flight(
 ) -> None:
     crud_flights.remove(session, id=flight_id)
     return None
+
+@router.get("", response_model=list[Flights])
+async def get_all_flights(
+    session: Session = Depends(get_session),
+) -> list[Flights]:
+    flights = crud_flights.get_all(session)
+    return flights

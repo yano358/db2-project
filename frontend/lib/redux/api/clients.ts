@@ -1,12 +1,12 @@
 import { emptySlitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
-    createClientApiV1ClientsUserIdPost: build.mutation<
-      CreateClientApiV1ClientsUserIdPostApiResponse,
-      CreateClientApiV1ClientsUserIdPostApiArg
+    createClientApiV1ClientsPost: build.mutation<
+      CreateClientApiV1ClientsPostApiResponse,
+      CreateClientApiV1ClientsPostApiArg
     >({
       query: (queryArg) => ({
-        url: `/api/v1/clients/${queryArg.userId}/`,
+        url: `/api/v1/clients`,
         method: "POST",
         body: queryArg.clientsCreate,
       }),
@@ -24,10 +24,9 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
-export type CreateClientApiV1ClientsUserIdPostApiResponse =
+export type CreateClientApiV1ClientsPostApiResponse =
   /** status 200 Successful Response */ Clients;
-export type CreateClientApiV1ClientsUserIdPostApiArg = {
-  userId: number;
+export type CreateClientApiV1ClientsPostApiArg = {
   clientsCreate: ClientsCreate;
 };
 export type DeleteClientApiV1ClientsUserIdDeleteApiResponse =
@@ -54,6 +53,7 @@ export type HttpValidationError = {
   detail?: ValidationError[];
 };
 export type ClientsCreate = {
+  user_id: number;
   first_name: string;
   last_name: string;
   country: string;
@@ -62,6 +62,6 @@ export type ClientsCreate = {
   postal_code: string;
 };
 export const {
-  useCreateClientApiV1ClientsUserIdPostMutation,
+  useCreateClientApiV1ClientsPostMutation,
   useDeleteClientApiV1ClientsUserIdDeleteMutation,
 } = injectedRtkApi;

@@ -1,6 +1,12 @@
 import { emptySlitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    readUsersApiV1UsersGet: build.query<
+      ReadUsersApiV1UsersGetApiResponse,
+      ReadUsersApiV1UsersGetApiArg
+    >({
+      query: () => ({ url: `/api/v1/users` }),
+    }),
     createUserApiV1UsersPost: build.mutation<
       CreateUserApiV1UsersPostApiResponse,
       CreateUserApiV1UsersPostApiArg
@@ -24,6 +30,9 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
+export type ReadUsersApiV1UsersGetApiResponse =
+  /** status 200 Successful Response */ User[];
+export type ReadUsersApiV1UsersGetApiArg = void;
 export type CreateUserApiV1UsersPostApiResponse =
   /** status 200 Successful Response */ User;
 export type CreateUserApiV1UsersPostApiArg = {
@@ -58,6 +67,8 @@ export type UserCreate = {
   is_superuser?: boolean;
 };
 export const {
+  useReadUsersApiV1UsersGetQuery,
+  useLazyReadUsersApiV1UsersGetQuery,
   useCreateUserApiV1UsersPostMutation,
   useDeleteUserApiV1UsersUserIdDeleteMutation,
 } = injectedRtkApi;

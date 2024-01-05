@@ -1,6 +1,12 @@
 import { emptySlitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    readAllPlanesApiV1PlanesGet: build.query<
+      ReadAllPlanesApiV1PlanesGetApiResponse,
+      ReadAllPlanesApiV1PlanesGetApiArg
+    >({
+      query: () => ({ url: `/api/v1/planes` }),
+    }),
     createPlanesApiV1PlanesPost: build.mutation<
       CreatePlanesApiV1PlanesPostApiResponse,
       CreatePlanesApiV1PlanesPostApiArg
@@ -24,6 +30,9 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
+export type ReadAllPlanesApiV1PlanesGetApiResponse =
+  /** status 200 Successful Response */ Planes[];
+export type ReadAllPlanesApiV1PlanesGetApiArg = void;
 export type CreatePlanesApiV1PlanesPostApiResponse =
   /** status 200 Successful Response */ Planes;
 export type CreatePlanesApiV1PlanesPostApiArg = {
@@ -52,6 +61,8 @@ export type PlanesCreate = {
   airline: string;
 };
 export const {
+  useReadAllPlanesApiV1PlanesGetQuery,
+  useLazyReadAllPlanesApiV1PlanesGetQuery,
   useCreatePlanesApiV1PlanesPostMutation,
   useDeletePlanesApiV1PlanesPlanesIdDeleteMutation,
 } = injectedRtkApi;

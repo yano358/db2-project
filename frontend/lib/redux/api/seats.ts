@@ -1,6 +1,12 @@
 import { emptySlitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getAllSeatsApiV1SeatsGet: build.query<
+      GetAllSeatsApiV1SeatsGetApiResponse,
+      GetAllSeatsApiV1SeatsGetApiArg
+    >({
+      query: () => ({ url: `/api/v1/seats` }),
+    }),
     createSeatApiV1SeatsPost: build.mutation<
       CreateSeatApiV1SeatsPostApiResponse,
       CreateSeatApiV1SeatsPostApiArg
@@ -10,12 +16,6 @@ const injectedRtkApi = api.injectEndpoints({
         method: "POST",
         body: queryArg.seatsCreate,
       }),
-    }),
-    getSeatApiV1SeatsSeatIdGet: build.query<
-      GetSeatApiV1SeatsSeatIdGetApiResponse,
-      GetSeatApiV1SeatsSeatIdGetApiArg
-    >({
-      query: (queryArg) => ({ url: `/api/v1/seats/${queryArg.seatId}/` }),
     }),
     deleteSeatApiV1SeatsSeatIdDelete: build.mutation<
       DeleteSeatApiV1SeatsSeatIdDeleteApiResponse,
@@ -30,15 +30,13 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
+export type GetAllSeatsApiV1SeatsGetApiResponse =
+  /** status 200 Successful Response */ Seats[];
+export type GetAllSeatsApiV1SeatsGetApiArg = void;
 export type CreateSeatApiV1SeatsPostApiResponse =
   /** status 200 Successful Response */ Seats;
 export type CreateSeatApiV1SeatsPostApiArg = {
   seatsCreate: SeatsCreate;
-};
-export type GetSeatApiV1SeatsSeatIdGetApiResponse =
-  /** status 200 Successful Response */ Seats;
-export type GetSeatApiV1SeatsSeatIdGetApiArg = {
-  seatId: number;
 };
 export type DeleteSeatApiV1SeatsSeatIdDeleteApiResponse =
   /** status 200 Successful Response */ any;
@@ -60,12 +58,13 @@ export type HttpValidationError = {
   detail?: ValidationError[];
 };
 export type SeatsCreate = {
+  plane_id: number;
   taken_status: boolean;
   class_type: string;
 };
 export const {
+  useGetAllSeatsApiV1SeatsGetQuery,
+  useLazyGetAllSeatsApiV1SeatsGetQuery,
   useCreateSeatApiV1SeatsPostMutation,
-  useGetSeatApiV1SeatsSeatIdGetQuery,
-  useLazyGetSeatApiV1SeatsSeatIdGetQuery,
   useDeleteSeatApiV1SeatsSeatIdDeleteMutation,
 } = injectedRtkApi;

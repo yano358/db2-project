@@ -15,8 +15,9 @@ const Login = () => {
       setAuthError(true);
     }
 
-    // TODO: redirect to home page
-    //window.location.href = "/";
+    // TODO: redirect to home page or to admin page if superuser
+
+    window.location.href = "/homepage";
   };
 
   return (

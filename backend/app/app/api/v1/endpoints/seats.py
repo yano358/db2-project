@@ -23,11 +23,10 @@ async def delete_seat(
 ) -> None:
     crud_seats.remove(session, id=seat_id)
 
-@router.get("/{seat_id}/" , response_model=Seats)
-async def get_seat(
-    seat_id: int,
-    session: Session = Depends(get_session),
-) -> Seats:
-    seat = crud_seats.get(session,id=seat_id)
-    return seat
 
+@router.get("", response_model=list[Seats])
+async def get_all_seats(
+    session: Session = Depends(get_session),
+) -> list[Seats]:
+    seats = crud_seats.get_all(session)
+    return seats

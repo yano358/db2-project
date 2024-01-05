@@ -20,6 +20,12 @@ const injectedRtkApi = api.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    readAllAirportsApiV1AirportsreadAllGet: build.query<
+      ReadAllAirportsApiV1AirportsreadAllGetApiResponse,
+      ReadAllAirportsApiV1AirportsreadAllGetApiArg
+    >({
+      query: () => ({ url: `/api/v1/airportsread-all` }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -34,6 +40,9 @@ export type DeleteAirportApiV1AirportsAirportIdDeleteApiResponse =
 export type DeleteAirportApiV1AirportsAirportIdDeleteApiArg = {
   airportId: number;
 };
+export type ReadAllAirportsApiV1AirportsreadAllGetApiResponse =
+  /** status 200 Successful Response */ Airports[];
+export type ReadAllAirportsApiV1AirportsreadAllGetApiArg = void;
 export type Airports = {
   id?: number;
   name?: string;
@@ -56,4 +65,6 @@ export type AirportsCreate = {
 export const {
   useCreateAirportApiV1AirportsPostMutation,
   useDeleteAirportApiV1AirportsAirportIdDeleteMutation,
+  useReadAllAirportsApiV1AirportsreadAllGetQuery,
+  useLazyReadAllAirportsApiV1AirportsreadAllGetQuery,
 } = injectedRtkApi;
