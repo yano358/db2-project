@@ -1,6 +1,12 @@
 import { emptySlitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getAllClientsApiV1ClientsGet: build.query<
+      GetAllClientsApiV1ClientsGetApiResponse,
+      GetAllClientsApiV1ClientsGetApiArg
+    >({
+      query: () => ({ url: `/api/v1/clients` }),
+    }),
     createClientApiV1ClientsPost: build.mutation<
       CreateClientApiV1ClientsPostApiResponse,
       CreateClientApiV1ClientsPostApiArg
@@ -24,6 +30,9 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
+export type GetAllClientsApiV1ClientsGetApiResponse =
+  /** status 200 Successful Response */ Clients[];
+export type GetAllClientsApiV1ClientsGetApiArg = void;
 export type CreateClientApiV1ClientsPostApiResponse =
   /** status 200 Successful Response */ Clients;
 export type CreateClientApiV1ClientsPostApiArg = {
@@ -62,6 +71,8 @@ export type ClientsCreate = {
   postal_code: string;
 };
 export const {
+  useGetAllClientsApiV1ClientsGetQuery,
+  useLazyGetAllClientsApiV1ClientsGetQuery,
   useCreateClientApiV1ClientsPostMutation,
   useDeleteClientApiV1ClientsUserIdDeleteMutation,
 } = injectedRtkApi;

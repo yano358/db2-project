@@ -64,7 +64,7 @@ export type FlightsCreate = {
   plane_id: number;
   start_airport_id: number;
   destination_airport_id: number;
-  price: number | string;
+  price: number;
   departure_time: string;
   arrival_time: string;
 };

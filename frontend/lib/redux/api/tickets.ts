@@ -26,6 +26,15 @@ const injectedRtkApi = api.injectEndpoints({
         params: { user_id: queryArg.userId },
       }),
     }),
+    deleteApiV1TicketsIdDelete: build.mutation<
+      DeleteApiV1TicketsIdDeleteApiResponse,
+      DeleteApiV1TicketsIdDeleteApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/v1/tickets/${queryArg.id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -42,6 +51,11 @@ export type GetForClientApiV1TicketscustomresponseGetApiResponse =
   /** status 200 Successful Response */ CustomTicketResponse[];
 export type GetForClientApiV1TicketscustomresponseGetApiArg = {
   userId: number;
+};
+export type DeleteApiV1TicketsIdDeleteApiResponse =
+  /** status 200 Successful Response */ any;
+export type DeleteApiV1TicketsIdDeleteApiArg = {
+  id: number;
 };
 export type Tickets = {
   id?: number;
@@ -119,4 +133,5 @@ export const {
   useLazyGetAllApiV1TicketsAllGetQuery,
   useGetForClientApiV1TicketscustomresponseGetQuery,
   useLazyGetForClientApiV1TicketscustomresponseGetQuery,
+  useDeleteApiV1TicketsIdDeleteMutation,
 } = injectedRtkApi;

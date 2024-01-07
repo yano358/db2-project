@@ -12,7 +12,7 @@ class SeatsCreate(BaseModel):
     class_type: str
 
 class SeatsUpdate(BaseModel):
-    pass
+    taken_status: Optional[bool] = None
 
 class Seats(BaseDBModel, table=True):
     __tablename__ = "seats"

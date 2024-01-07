@@ -48,7 +48,7 @@ async def get_for_client(
             luggage_details=crud_luggage.get(session, id=ticket.luggage_id),
             flight_details=crud_flights.get(session, id=ticket.flight_id),
             seat_details=crud_seats.get(session, id=ticket.seat_id),
-            client_details=crud_clients.get(session, id=ticket.client_id),
+            client_details=crud_clients.get_by_user_id(session, user_id=ticket.client_id),
             plane_details=crud_planes.get(session, id=flight_details.plane_id),
             start_airport_details=crud_airports.get(session, id=flight_details.start_airport_id),
             destination_airport_details=crud_airports.get(session, id=flight_details.destination_airport_id),
@@ -56,3 +56,11 @@ async def get_for_client(
         custom_tickets.append(custom_ticket)
 
     return custom_tickets
+
+@router.delete("/{id}")
+async def delete(
+    id: int,
+    session: Session = Depends(get_session),
+) -> None:
+    crud_tickets.remove(session, id=id)
+    return None

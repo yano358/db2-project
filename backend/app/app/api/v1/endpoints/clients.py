@@ -24,3 +24,10 @@ async def delete_client(
 ) -> None:
     crud_clients.remove(session, id=user_id)
     return None
+
+@router.get("", response_model=list[Clients])
+async def get_all_clients(
+    session: Session = Depends(get_session),
+) -> list[Clients]:
+    clients = crud_clients.get_all(session)
+    return clients

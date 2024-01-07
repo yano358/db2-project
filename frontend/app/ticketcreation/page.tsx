@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,12 +12,33 @@ import {
   MenuItem,
 } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
+//create ticket
+import {
+  useCreateApiV1TicketsPostMutation,
+  TicketsCreate,
+} from "@/lib/redux/api/tickets";
+
+import AvailableSeatsComponent from "../components/AvailableSeatsComponent";
+import SelectableFlightComponent from "../components/SelectableFlightComponent";
+import TicketCreationButton from "../components/TicketCreationComponent";
 
 export default function TicketCreationPage() {
-  const [luggageType, setLuggageType] = React.useState("");
+  const [luggageType, setLuggageType] = useState("");
+  const [flightId, setFlightId] = useState<number | string>("");
+  const [planeId, setPlaneId] = useState<number | string>("");
+  const [seatId, setSeatId] = useState<number | string>("");
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChangeLuggage = (event: SelectChangeEvent) => {
     setLuggageType(event.target.value as string);
+  };
+
+  const handleChangeFlight = (selectedFlightId: [string, string]) => {
+    setFlightId(selectedFlightId[0]);
+    setPlaneId(selectedFlightId[1]);
+  };
+
+  const handleChangeSeat = (selectedSeatId: string) => {
+    setSeatId(selectedSeatId);
   };
 
   return (
@@ -33,25 +54,34 @@ export default function TicketCreationPage() {
                 id="select-luggage"
                 value={luggageType}
                 label="Bagaz"
-                onChange={handleChange}
+                onChange={handleChangeLuggage}
               >
-                <MenuItem value={"Podreczny"}>Podreczny</MenuItem>
-                <MenuItem value={"Nadany"}>Nadany</MenuItem>
-                <MenuItem value={"Podreczny i Nadany"}>
-                  Podreczny i Nadany
-                </MenuItem>
+                <MenuItem value={2}>Podreczny</MenuItem>
+                <MenuItem value={3}>Nadany</MenuItem>
+                <MenuItem value={4}>Podreczny i Nadany</MenuItem>
               </Select>
             </FormControl>
           </Box>
 
-          <TextField label="Description" />
-          <TextField label="Priority" />
-          <TextField label="Status" />
-          <TextField label="Type" />
-          <TextField label="Project" />
-          <TextField label="Author" />
-          <TextField label="Assignee" />
-          <Button variant="contained">Dodaj</Button>
+          <Box>
+            <SelectableFlightComponent
+              label="Lot"
+              onChange={handleChangeFlight}
+            />
+          </Box>
+
+          <Box>
+            <AvailableSeatsComponent
+              flightId={Number(planeId)}
+              onChange={handleChangeSeat}
+            />
+          </Box>
+
+          <TicketCreationButton
+            flightId={String(flightId)}
+            seatId={String(seatId)}
+            luggageId={String(luggageType)}
+          ></TicketCreationButton>
         </Stack>
       </Stack>
     </>
