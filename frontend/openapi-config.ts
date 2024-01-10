@@ -7,15 +7,15 @@ const config: ConfigFile = {
   exportName: "api",
   hooks: { queries: true, lazyQueries: true, mutations: true },
   outputFiles: {
-    "./lib/redux/api/todoLists.ts": {
-      filterEndpoints: (endpoint) => endpoint.includes("TodoList"),
-    },
-    "./lib/redux/api/users.ts": {
-      filterEndpoints: (endpoint) => endpoint.includes("User"),
-    },
-    "./lib/redux/api/login.ts": {
-      filterEndpoints: (endpoint) => endpoint.includes("Login"),
-    },
+    "./lib/redux/api/users.ts": { filterEndpoints: [/users/i] },
+    "./lib/redux/api/login.ts": { filterEndpoints: [/login/i] },
+    "./lib/redux/api/planes.ts": { filterEndpoints: [/planes/i] },
+    "./lib/redux/api/airports.ts": { filterEndpoints: [/airports/i] },
+    "./lib/redux/api/luggage.ts": { filterEndpoints: [/luggage/i] },
+    "./lib/redux/api/clients.ts": { filterEndpoints: [/clients/i] },
+    "./lib/redux/api/flights.ts": { filterEndpoints: [/flights/i] },
+    "./lib/redux/api/tickets.ts": { filterEndpoints: [/tickets/i] },
+    "./lib/redux/api/seats.ts": { filterEndpoints: [/seats/i] },
   },
 };
 

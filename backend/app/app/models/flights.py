@@ -7,6 +7,9 @@ from sqlmodel import Field, ForeignKey,Column
 
  
 class FlightsCreate(BaseModel):
+    plane_id: int
+    start_airport_id: int
+    destination_airport_id: int
     price: float
     departure_time: str
     arrival_time: str

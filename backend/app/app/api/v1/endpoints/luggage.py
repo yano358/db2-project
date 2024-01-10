@@ -23,3 +23,10 @@ async def delete_luggage(
 ) -> None:
     crud_luggage.remove(session, id=luggage_id)
     return None
+
+@router.get("", response_model=list[Luggage])
+async def get_all_luggage(
+    session: Session = Depends(get_session),
+) -> list[Luggage]:
+    luggage = crud_luggage.get_all(session)
+    return luggage

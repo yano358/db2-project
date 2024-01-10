@@ -9,7 +9,7 @@ from app.api.v1.endpoints.luggage import router as luggage_router
 
 from app.api.v1.endpoints.clients import router as clients_router
 from app.api.v1.endpoints.flights import router as flights_router
-#from app.api.v1.endpoints.tickets import router as tickets_router
+from app.api.v1.endpoints.tickets import router as tickets_router
 from app.api.v1.endpoints.seats import router as seats_router
 
 
@@ -25,5 +25,5 @@ api_v1_router.include_router(luggage_router, prefix="/luggage", tags=["luggage"]
 
 api_v1_router.include_router(clients_router, prefix="/clients", tags=["clients"])
 api_v1_router.include_router(flights_router, prefix="/flights", tags=["flights"])
-#api_v1_router.include_router(tickets_router, prefix="/tickets", tags=["tickets"])
+api_v1_router.include_router(tickets_router, prefix="/tickets", tags=["tickets"])
 api_v1_router.include_router(seats_router, prefix="/seats", tags=["seats"])

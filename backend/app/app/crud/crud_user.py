@@ -6,6 +6,9 @@ from app.crud.base import CRUDBase
 
 
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
+    def get_all(self, db: Session) -> list[User]:
+        return db.exec(select(User)).all()
+
     def get_by_email(self, db: Session, *, email: str) -> Optional[User]:
         return db.exec(select(User).where(User.email == email)).first()
 

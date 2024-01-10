@@ -9,9 +9,8 @@ from app.crud.crud_clients import crud_clients
 
 router = APIRouter()
 
-@router.post("/{user_id}/", response_model=Clients)
+@router.post("", response_model=Clients)
 async def create_client(
-    #user_id: int,
     clients_in: ClientsCreate,
     session: Session = Depends(get_session),
 ) -> Clients:
@@ -25,3 +24,10 @@ async def delete_client(
 ) -> None:
     crud_clients.remove(session, id=user_id)
     return None
+
+@router.get("", response_model=list[Clients])
+async def get_all_clients(
+    session: Session = Depends(get_session),
+) -> list[Clients]:
+    clients = crud_clients.get_all(session)
+    return clients
