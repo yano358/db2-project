@@ -283,7 +283,16 @@ const CreatePlaneComponent: React.FC = () => {
         <Button
           variant="contained"
           onClick={handleButtonClickFlight}
-          disabled={!flightData.price}
+          disabled={
+            !flightData.price ||
+            flightData.price < 0 ||
+            !selectedDate ||
+            !selectedDateArrival ||
+            !selectedPlane ||
+            !selectedDestinationAirport ||
+            !selectedStartAirport ||
+            selectedDate > selectedDateArrival
+          }
         >
           Create Flight
         </Button>

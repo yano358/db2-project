@@ -16,28 +16,41 @@ const Login = () => {
     }
 
     // TODO: redirect to home page or to admin page if superuser
-
-    window.location.href = "/homepage";
+    window.location.href = "/adminskiemoce";
   };
 
   return (
     <>
       <Stack spacing={2}>
-        <Typography variant="h1">Hello 👋</Typography>
+        <Typography
+          variant="h4"
+          sx={{
+            fontFamily: "Arial",
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "#009688",
+          }}
+        >
+          Log-in
+        </Typography>
         <Stack spacing={2}>
           <TextField
             label="Email"
+            type={"email"}
+            required
             onChange={(e) => setEmail(e.currentTarget.value)}
           />
           <TextField
             label="Password"
+            type="password"
+            required
             onChange={(e) => setPassword(e.currentTarget.value)}
           />
-          {authError && (
-            <Typography color="error">Failed to authenticate</Typography>
-          )}
           <Button variant="contained" onClick={handleLogin}>
             Login
+          </Button>
+          <Button variant="contained" href="/register">
+            No account yet? Register here!
           </Button>
         </Stack>
       </Stack>

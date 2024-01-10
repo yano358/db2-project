@@ -2,7 +2,7 @@ import React from "react";
 import TicketList from "../components/TicketDisplayComponent";
 
 const ParentComponent = () => {
-  // Assuming client ID is 8
+  // Assuming client ID is 6
   const clientId = 6;
 
   return (

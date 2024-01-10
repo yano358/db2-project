@@ -11,11 +11,11 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.bodyLoginAccessTokenApiV1LoginAccessTokenPost,
       }),
     }),
-    testTokenApiV1LoginLoginTestTokenPost: build.mutation<
-      TestTokenApiV1LoginLoginTestTokenPostApiResponse,
-      TestTokenApiV1LoginLoginTestTokenPostApiArg
+    testTokenApiV1LoginLoginTestTokenGet: build.query<
+      TestTokenApiV1LoginLoginTestTokenGetApiResponse,
+      TestTokenApiV1LoginLoginTestTokenGetApiArg
     >({
-      query: () => ({ url: `/api/v1/login/login/test-token`, method: "POST" }),
+      query: () => ({ url: `/api/v1/login/login/test-token` }),
     }),
   }),
   overrideExisting: false,
@@ -26,9 +26,9 @@ export type LoginAccessTokenApiV1LoginAccessTokenPostApiResponse =
 export type LoginAccessTokenApiV1LoginAccessTokenPostApiArg = {
   bodyLoginAccessTokenApiV1LoginAccessTokenPost: BodyLoginAccessTokenApiV1LoginAccessTokenPost;
 };
-export type TestTokenApiV1LoginLoginTestTokenPostApiResponse =
+export type TestTokenApiV1LoginLoginTestTokenGetApiResponse =
   /** status 200 Successful Response */ User;
-export type TestTokenApiV1LoginLoginTestTokenPostApiArg = void;
+export type TestTokenApiV1LoginLoginTestTokenGetApiArg = void;
 export type Token = {
   access_token: string;
   token_type: string;
@@ -60,5 +60,6 @@ export type User = {
 };
 export const {
   useLoginAccessTokenApiV1LoginAccessTokenPostMutation,
-  useTestTokenApiV1LoginLoginTestTokenPostMutation,
+  useTestTokenApiV1LoginLoginTestTokenGetQuery,
+  useLazyTestTokenApiV1LoginLoginTestTokenGetQuery,
 } = injectedRtkApi;

@@ -16,6 +16,7 @@ export const login = async (email: string, password: string) => {
 
     if (!result.ok) {
       // If the response status is not okay (2xx range), handle the error
+      alert("Wrong email or password");
       throw new Error("Failed to log in");
     }
 

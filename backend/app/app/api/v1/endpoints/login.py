@@ -36,9 +36,6 @@ def login_access_token(
     )
 
 
-@router.post("/login/test-token", response_model=User)
+@router.get("/login/test-token", response_model=User)
 def test_token(current_user: User = Depends(get_current_user)) -> User:
-    """
-    Test access token
-    """
     return current_user
