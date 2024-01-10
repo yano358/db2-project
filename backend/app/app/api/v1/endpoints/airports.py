@@ -23,3 +23,10 @@ async def delete_airport(
 ) -> None:
     crud_airports.remove(session, id=airport_id)
     return None
+
+@router.get("read-all", response_model=list[Airports])
+async def read_all_airports(
+    session: Session = Depends(get_session),
+) -> list[Airports]:
+    airports = crud_airports.get_all(session)
+    return airports

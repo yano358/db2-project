@@ -7,7 +7,7 @@ from sqlmodel import Field, Column, ForeignKey
 
 
 class ClientsCreate(BaseModel):
-
+    user_id: int
     first_name: str
     last_name: str
     country: str
