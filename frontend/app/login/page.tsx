@@ -1,8 +1,13 @@
 "use client";
 
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { login } from "app/services/login";
+import { fetchLoginData } from "app/services/login";
 import { useState } from "react";
+import {
+  useLazyGetCurrentUserApiV1UsersUserGetQuery,
+  useGetCurrentUserApiV1UsersUserGetQuery,
+  User,
+} from "@/lib/redux/api/users";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,13 +15,18 @@ const Login = () => {
   const [authError, setAuthError] = useState(false);
 
   const handleLogin = async () => {
-    const { error } = await login(email, password);
-    if (error) {
+    try {
+      const loginData = await fetchLoginData(email, password);
+      if (loginData.user.is_superuser) {
+        setAuthError(false);
+        window.location.href = "/adminskiemoce";
+      } else {
+        setAuthError(false);
+        window.location.href = "/ticketcreation";
+      }
+    } catch {
       setAuthError(true);
     }
-
-    // TODO: redirect to home page or to admin page if superuser
-    window.location.href = "/adminskiemoce";
   };
 
   return (

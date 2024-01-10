@@ -6,23 +6,19 @@ import {
 } from "@/lib/redux/api/tickets";
 import { Card, CardContent, Typography, Grid, makeStyles } from "@mui/material";
 
-interface TicketListProps {
-  clientId: number;
-}
-
-const TicketList: React.FC<TicketListProps> = ({ clientId }) => {
+const TicketList: React.FC = () => {
   const {
     data: ticketData,
     isLoading,
     isError,
     error,
     refetch,
-  } = useGetForClientApiV1TicketscustomresponseGetQuery({ userId: clientId });
+  } = useGetForClientApiV1TicketscustomresponseGetQuery();
 
   useEffect(() => {
     // Fetch ticket data for the given client ID
     refetch();
-  }, [clientId, refetch]);
+  }, [refetch]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -32,7 +28,7 @@ const TicketList: React.FC<TicketListProps> = ({ clientId }) => {
 
   return (
     <div>
-      <h2>Ticket List for Client ID: {clientId}</h2>
+      <h2>Your Tickets:</h2>
       {ticketData &&
         ticketData.map((ticket: CustomTicketResponse) => (
           <Card

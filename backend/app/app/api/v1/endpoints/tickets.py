@@ -5,6 +5,7 @@ from app.core.db import get_session
 from app.models.tickets import CustomTicketResponse
 
 from app.models.tickets import Tickets, TicketsCreate
+from app.models.user import User
 
 from app.crud.crud_tickets import crud_tickets
 
@@ -14,6 +15,7 @@ from app.crud.crud_seats import crud_seats
 from app.crud.crud_clients import crud_clients
 from app.crud.crud_planes import crud_planes
 from app.crud.crud_airports import crud_airports
+from app.dependencies.auth import get_current_user
 
 router = APIRouter()
 
@@ -35,10 +37,10 @@ async def get_all(
 
 @router.get("customresponse", response_model=list[CustomTicketResponse])
 async def get_for_client(
-    user_id: int,
+    current_user: User = Depends(get_current_user),
     session: Session = Depends(get_session),
 ) -> list[CustomTicketResponse]:
-    tickets = crud_tickets.get_for_user(session, user_id=user_id)
+    tickets = crud_tickets.get_for_user(session, user_id=current_user.id)
     custom_tickets = []
 
     for ticket in tickets:

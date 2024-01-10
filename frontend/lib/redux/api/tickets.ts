@@ -21,10 +21,7 @@ const injectedRtkApi = api.injectEndpoints({
       GetForClientApiV1TicketscustomresponseGetApiResponse,
       GetForClientApiV1TicketscustomresponseGetApiArg
     >({
-      query: (queryArg) => ({
-        url: `/api/v1/ticketscustomresponse`,
-        params: { user_id: queryArg.userId },
-      }),
+      query: () => ({ url: `/api/v1/ticketscustomresponse` }),
     }),
     deleteApiV1TicketsIdDelete: build.mutation<
       DeleteApiV1TicketsIdDeleteApiResponse,
@@ -49,9 +46,7 @@ export type GetAllApiV1TicketsAllGetApiResponse =
 export type GetAllApiV1TicketsAllGetApiArg = void;
 export type GetForClientApiV1TicketscustomresponseGetApiResponse =
   /** status 200 Successful Response */ CustomTicketResponse[];
-export type GetForClientApiV1TicketscustomresponseGetApiArg = {
-  userId: number;
-};
+export type GetForClientApiV1TicketscustomresponseGetApiArg = void;
 export type DeleteApiV1TicketsIdDeleteApiResponse =
   /** status 200 Successful Response */ any;
 export type DeleteApiV1TicketsIdDeleteApiArg = {
