@@ -3,11 +3,6 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { fetchLoginData } from "app/services/login";
 import { useState } from "react";
-import {
-  useLazyGetCurrentUserApiV1UsersUserGetQuery,
-  useGetCurrentUserApiV1UsersUserGetQuery,
-  User,
-} from "@/lib/redux/api/users";
 
 const Login = () => {
   const [email, setEmail] = useState("");

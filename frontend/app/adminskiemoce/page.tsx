@@ -24,6 +24,7 @@ import {
 import SelectablePlaneComponent from "../components/SelectablePlaneComponent";
 import SelectableAirportComponent from "../components/SelectableAirportComponent";
 import DateTimePicker from "../components/DateTimePicker";
+import SignOutButton from "../components/SignOutComponent";
 import { Dayjs } from "dayjs";
 
 const CreatePlaneComponent: React.FC = () => {
@@ -172,6 +173,18 @@ const CreatePlaneComponent: React.FC = () => {
     }
   };
 
+  const handleButtonClickBuisnessSeat = async () => {
+    seatData.class_type = "Buisness";
+    seatData.taken_status = false;
+    try {
+      const response = await createSeatMutation({
+        seatsCreate: seatData,
+      });
+    } catch (error) {
+      console.error("Error creating plane:", error);
+    }
+  };
+
   return (
     <>
       <Box sx={{ "& > :not(style)": { marginBottom: 2 } }}>
@@ -291,7 +304,8 @@ const CreatePlaneComponent: React.FC = () => {
             !selectedPlane ||
             !selectedDestinationAirport ||
             !selectedStartAirport ||
-            selectedDate > selectedDateArrival
+            selectedDate > selectedDateArrival ||
+            selectedStartAirport === selectedDestinationAirport
           }
         >
           Create Flight
@@ -301,9 +315,22 @@ const CreatePlaneComponent: React.FC = () => {
       <Box sx={{ "& > :not(style)": { marginBottom: 2 } }}>
         <SelectablePlaneComponent onChange={handlePlaneSeatChange} />
         <Button variant="contained" onClick={handleButtonClickSeat}>
-          Add Seat to Selected Plane
+          Add Economy Seat to Selected Plane
         </Button>
       </Box>
+
+      <Box sx={{ "& > :not(style)": { marginBottom: 2 } }}>
+        <Button variant="contained" onClick={handleButtonClickBuisnessSeat}>
+          Add Buisness Seat to Selected Plane
+        </Button>
+      </Box>
+
+      <Box sx={{ "& > :not(style)": { marginBottom: 2 } }}>
+        <Button variant="contained" href="/admindisplay">
+          Browse Tickets
+        </Button>
+      </Box>
+      <SignOutButton />
     </>
   );
 };

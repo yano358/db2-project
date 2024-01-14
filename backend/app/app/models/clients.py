@@ -16,9 +16,13 @@ class ClientsCreate(BaseModel):
     postal_code: str
     
 
-
 class ClientsUpdate(BaseModel):
-    pass
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    country: Optional[str] = None
+    city: Optional[str] = None
+    address: Optional[str] = None
+    postal_code: Optional[str] = None
  
 class Clients(BaseDBModel, table=True):
     __tablename__ = "clients"

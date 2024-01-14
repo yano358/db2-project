@@ -26,6 +26,22 @@ const injectedRtkApi = api.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    getForCurrentUserApiV1ClientsgetClientsForCurrentGet: build.query<
+      GetForCurrentUserApiV1ClientsgetClientsForCurrentGetApiResponse,
+      GetForCurrentUserApiV1ClientsgetClientsForCurrentGetApiArg
+    >({
+      query: () => ({ url: `/api/v1/clientsgetClientsForCurrent` }),
+    }),
+    updateClientApiV1ClientsUserIdPatch: build.mutation<
+      UpdateClientApiV1ClientsUserIdPatchApiResponse,
+      UpdateClientApiV1ClientsUserIdPatchApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/v1/clients/${queryArg.userId}`,
+        method: "PATCH",
+        body: queryArg.clientsUpdate,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -42,6 +58,15 @@ export type DeleteClientApiV1ClientsUserIdDeleteApiResponse =
   /** status 200 Successful Response */ any;
 export type DeleteClientApiV1ClientsUserIdDeleteApiArg = {
   userId: number;
+};
+export type GetForCurrentUserApiV1ClientsgetClientsForCurrentGetApiResponse =
+  /** status 200 Successful Response */ Clients[];
+export type GetForCurrentUserApiV1ClientsgetClientsForCurrentGetApiArg = void;
+export type UpdateClientApiV1ClientsUserIdPatchApiResponse =
+  /** status 200 Successful Response */ Clients;
+export type UpdateClientApiV1ClientsUserIdPatchApiArg = {
+  userId: number;
+  clientsUpdate: ClientsUpdate;
 };
 export type Clients = {
   id?: number;
@@ -70,9 +95,20 @@ export type ClientsCreate = {
   address: string;
   postal_code: string;
 };
+export type ClientsUpdate = {
+  first_name?: string;
+  last_name?: string;
+  country?: string;
+  city?: string;
+  address?: string;
+  postal_code?: string;
+};
 export const {
   useGetAllClientsApiV1ClientsGetQuery,
   useLazyGetAllClientsApiV1ClientsGetQuery,
   useCreateClientApiV1ClientsPostMutation,
   useDeleteClientApiV1ClientsUserIdDeleteMutation,
+  useGetForCurrentUserApiV1ClientsgetClientsForCurrentGetQuery,
+  useLazyGetForCurrentUserApiV1ClientsgetClientsForCurrentGetQuery,
+  useUpdateClientApiV1ClientsUserIdPatchMutation,
 } = injectedRtkApi;

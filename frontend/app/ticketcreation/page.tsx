@@ -18,15 +18,26 @@ import {
   TicketsCreate,
 } from "@/lib/redux/api/tickets";
 
+import { useGetForCurrentUserApiV1ClientsgetClientsForCurrentGetQuery } from "@/lib/redux/api/clients";
+
 import AvailableSeatsComponent from "../components/AvailableSeatsComponent";
 import SelectableFlightComponent from "../components/SelectableFlightComponent";
 import TicketCreationButton from "../components/TicketCreationComponent";
+import SignOutButtonUser from "../components/ButtonGroupUserComponent";
 
 export default function TicketCreationPage() {
   const [luggageType, setLuggageType] = useState("");
   const [flightId, setFlightId] = useState<number | string>("");
   const [planeId, setPlaneId] = useState<number | string>("");
   const [seatId, setSeatId] = useState<number | string>("");
+  const [clientID, setClientID] = useState<number | string>("");
+
+  const { data: currentClients } =
+    useGetForCurrentUserApiV1ClientsgetClientsForCurrentGetQuery();
+
+  if (!currentClients) {
+    return <div>Loading...</div>;
+  }
 
   const handleChangeLuggage = (event: SelectChangeEvent) => {
     setLuggageType(event.target.value as string);
@@ -39,6 +50,10 @@ export default function TicketCreationPage() {
 
   const handleChangeSeat = (selectedSeatId: string) => {
     setSeatId(selectedSeatId);
+  };
+
+  const handleChangeClient = (selectedClientID: string | number) => {
+    setClientID(selectedClientID);
   };
 
   return (
@@ -77,13 +92,34 @@ export default function TicketCreationPage() {
             />
           </Box>
 
+          <Box>
+            <FormControl fullWidth>
+              <InputLabel id="select-label-client">Klient</InputLabel>
+              <Select
+                labelId="select-label-client"
+                id="select-client"
+                value={clientID}
+                label="Klient"
+                onChange={(event) => handleChangeClient(event.target.value)}
+              >
+                {currentClients.map((client) => (
+                  <MenuItem value={client.id}>
+                    {client.first_name} {client.last_name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+
           <TicketCreationButton
             flightId={String(flightId)}
             seatId={String(seatId)}
             luggageId={String(luggageType)}
+            clientId={String(clientID)}
           ></TicketCreationButton>
         </Stack>
       </Stack>
+      <SignOutButtonUser />
     </>
   );
 }

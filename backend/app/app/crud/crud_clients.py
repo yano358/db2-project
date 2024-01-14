@@ -10,5 +10,8 @@ class CRUDClients(CRUDBase[Clients, ClientsCreate, ClientsUpdate]):
     
     def get_by_user_id(self, db: Session, user_id: int):
         return db.query(self.model).filter(self.model.user_id == user_id).first()
+    
+    def get_all_for_user(self, db: Session, user_id: int):
+        return db.query(self.model).filter(self.model.user_id == user_id).all()
 
 crud_clients = CRUDClients(Clients)

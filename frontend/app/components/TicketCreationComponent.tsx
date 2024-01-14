@@ -9,25 +9,32 @@ import {
   UpdateSeatApiV1SeatsSeatIdPutApiArg,
 } from "@/lib/redux/api/seats"; // Import the update seat API hook
 
+import { useGetForCurrentUserApiV1ClientsgetClientsForCurrentGetQuery } from "@/lib/redux/api/clients";
+
+import { useGetCurrentUserApiV1UsersUserGetQuery } from "@/lib/redux/api/users";
+
 interface TicketCreationButtonProps {
   flightId: string;
   seatId: string;
   luggageId: string;
+  clientId: string;
 }
 
 const TicketCreationButton: React.FC<TicketCreationButtonProps> = ({
   flightId,
   seatId,
   luggageId,
+  clientId,
 }) => {
   const [createTicketMutation] = useCreateApiV1TicketsPostMutation();
   const [updateSeatMutation] = useUpdateSeatApiV1SeatsSeatIdPutMutation(); // Initialize the seat update mutation hook
+  //const { data: currentUser } = useGetCurrentUserApiV1UsersUserGetQuery();
 
   const [ticketsCreate, setTicketsCreate] = useState<TicketsCreate>({
     flight_id: 0,
     seat_id: 0,
     luggage_id: 0,
-    client_id: 6,
+    client_id: 0,
   });
 
   const handleCreateTicket = async () => {
@@ -35,7 +42,7 @@ const TicketCreationButton: React.FC<TicketCreationButtonProps> = ({
       ticketsCreate.flight_id = parseInt(flightId);
       ticketsCreate.seat_id = parseInt(seatId);
       ticketsCreate.luggage_id = parseInt(luggageId);
-      ticketsCreate.client_id = 6;
+      ticketsCreate.client_id = parseInt(clientId);
 
       const response = await createTicketMutation({
         ticketsCreate: ticketsCreate,

@@ -32,6 +32,19 @@ const injectedRtkApi = api.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    getFilteredTicketsApiV1TicketsgetFilteredTicketsGet: build.query<
+      GetFilteredTicketsApiV1TicketsgetFilteredTicketsGetApiResponse,
+      GetFilteredTicketsApiV1TicketsgetFilteredTicketsGetApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/v1/ticketsgetFilteredTickets`,
+        params: {
+          flight_id: queryArg.flightId,
+          user_id: queryArg.userId,
+          luggage_id: queryArg.luggageId,
+        },
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -51,6 +64,13 @@ export type DeleteApiV1TicketsIdDeleteApiResponse =
   /** status 200 Successful Response */ any;
 export type DeleteApiV1TicketsIdDeleteApiArg = {
   id: number;
+};
+export type GetFilteredTicketsApiV1TicketsgetFilteredTicketsGetApiResponse =
+  /** status 200 Successful Response */ CustomTicketResponse[];
+export type GetFilteredTicketsApiV1TicketsgetFilteredTicketsGetApiArg = {
+  flightId?: number;
+  userId?: number;
+  luggageId?: number;
 };
 export type Tickets = {
   id?: number;
@@ -129,4 +149,6 @@ export const {
   useGetForClientApiV1TicketscustomresponseGetQuery,
   useLazyGetForClientApiV1TicketscustomresponseGetQuery,
   useDeleteApiV1TicketsIdDeleteMutation,
+  useGetFilteredTicketsApiV1TicketsgetFilteredTicketsGetQuery,
+  useLazyGetFilteredTicketsApiV1TicketsgetFilteredTicketsGetQuery,
 } = injectedRtkApi;
