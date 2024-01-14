@@ -1,6 +1,6 @@
 # db2-project
 
-Project for Databases 2 course at PWR.
+Project for Databases 2 course at PWR that I turned into my fullstack-app excercise.
 
 ## How to run:
 
