@@ -40,7 +40,7 @@ const injectedRtkApi = api.injectEndpoints({
         url: `/api/v1/ticketsgetFilteredTickets`,
         params: {
           flight_id: queryArg.flightId,
-          user_id: queryArg.userId,
+          client_id: queryArg.clientId,
           luggage_id: queryArg.luggageId,
         },
       }),
@@ -69,7 +69,7 @@ export type GetFilteredTicketsApiV1TicketsgetFilteredTicketsGetApiResponse =
   /** status 200 Successful Response */ CustomTicketResponse[];
 export type GetFilteredTicketsApiV1TicketsgetFilteredTicketsGetApiArg = {
   flightId?: number;
-  userId?: number;
+  clientId?: number;
   luggageId?: number;
 };
 export type Tickets = {

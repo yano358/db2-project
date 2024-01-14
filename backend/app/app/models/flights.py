@@ -3,7 +3,10 @@ from app.models.base_model import BaseDBModel
 
 from typing import Optional
 from pydantic import BaseModel
-from sqlmodel import Field, ForeignKey,Column
+from sqlmodel import Field, ForeignKey
+from app.models.airports import Airports
+from app.models.planes import Planes
+
 
  
 class FlightsCreate(BaseModel):
@@ -13,6 +16,15 @@ class FlightsCreate(BaseModel):
     price: float
     departure_time: str
     arrival_time: str
+
+class CustomFlights(BaseModel):
+    id: int
+    price: float
+    departure_time: str
+    arrival_time: str
+    plane_details: Planes
+    start_airport_details: Airports
+    destination_airport_details: Airports
 
 
 class FlightsUpdate(BaseModel):

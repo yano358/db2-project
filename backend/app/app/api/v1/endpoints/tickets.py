@@ -73,11 +73,11 @@ async def delete(
 @router.get("getFilteredTickets", response_model=list[CustomTicketResponse])
 async def get_filtered_tickets(
     flight_id: int = None,
-    user_id: int = None,
+    client_id: int = None,
     luggage_id: int = None,
     session: Session = Depends(get_session),
 ) -> list[CustomTicketResponse]:
-    tickets = crud_tickets.get_filtered_tickets(session, flight_id=flight_id, user_id=user_id, luggage_id=luggage_id)
+    tickets = crud_tickets.get_filtered_tickets(session, flight_id=flight_id, user_id=client_id, luggage_id=luggage_id)
     ids = []
     custom_tickets = []
     for ticket in tickets:
