@@ -16,17 +16,19 @@ poetry install
 
 > start backend
 
+
 ```bash
 cd backend/app
 cp .env.sample .env
 docker compose up   # first terminal
 ./start-api.sh  # second terminal (in case this does not work, paste the command from the script into terminal directly)
 ```
+Make sure alembic.ini file is configured with proper parameters, make sure .env file is configured properly!
 
 ### Frontend
 
 ```bash
 cd frontend
-pnpm
-pnpm dev
+npm install
+npm run dev
 ```
